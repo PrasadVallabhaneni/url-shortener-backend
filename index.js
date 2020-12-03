@@ -121,11 +121,11 @@ app.post("/forgot", async (req, res) => {
 
        // send mail with defined transport object
        let info = await transporter.sendMail({
-         from:process.env.SENDER, // sender address
+         from: process.env.SENDER, // sender address
          to: req.body.email, // list of receivers
          subject: "Reset Password ✔", // Subject line
          text: "Hello world?", // plain text body
-         html: `<a href="http://localhost:3000/auth/${req.body.email}/${string}">Click on this link </a>`, // html body
+         html: `<a href="https://users-registration-form.herokuapp.com/auth/${req.body.email}/${string}">Click on this link </a>`, // html body
        });
        await db
          .collection("users")
