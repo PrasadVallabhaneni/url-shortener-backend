@@ -148,7 +148,9 @@ app.get('/auth/:mail/:string',async (req,res)=>{
       .findOne({ email: req.params.mail });
   
       if(result.string==req.params.string){
-          res.redirect(`http://127.0.0.1:5501/reset.html?${req.params.mail}?${req.params.string}`);
+          res.redirect(
+            `https://user-registration-form.netlify.app/reset.html?${req.params.mail}?${req.params.string}`
+          );
         //   res.status(200).json({message:'matched'});
       }else{
            res.status(200).json({message:'Link Expired'})
