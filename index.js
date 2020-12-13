@@ -15,7 +15,7 @@ const port = process.env.PORT || 4000;
 app.use(express.json());
 app.use(cors());
 
-app.get("/",auth, async (req, res) => {
+app.get("/", async (req, res) => {
   try {
     let clientInfo = await mongoClient.connect(dbURL);
     let db = clientInfo.db("Registration");
