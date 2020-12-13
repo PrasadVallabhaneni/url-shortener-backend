@@ -119,7 +119,7 @@ app.get("/activate/:mail/:string", async (req, res) => {
       await db
         .collection("users")
         .updateOne({ email: req.params.mail }, { $set: { string: "",status:true } });
-      res.redirect(`http://127.0.0.1:5502/frontEnd/index.html`);
+      res.redirect(`https://url-shrtnr.netlify.app/index.html`);
         res.status(200).json({message:'activated'});
     } else {
       res.status(200).json({ message: "Link Expired" });
@@ -215,7 +215,7 @@ app.get("/auth/:mail/:string", async (req, res) => {
 
     if (result.string == req.params.string) {
       res.redirect(
-        `http://127.0.0.1:5502/frontEnd/reset.html?${req.params.mail}?${req.params.string}`
+        `https://url-shrtnr.netlify.app/reset.html?${req.params.mail}?${req.params.string}`
       );
       //   res.status(200).json({message:'matched'});
     } else {
