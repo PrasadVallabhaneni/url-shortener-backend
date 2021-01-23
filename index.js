@@ -72,33 +72,33 @@ app.post("/register", async (req, res) => {
       req.body.password = hash;
       await db.collection("users").insertOne(req.body);
       
-       var string = Math.random().toString(36).substr(2, 10);
-       let transporter = nodemailer.createTransport({
-         host: "smtp.gmail.com",
-         port: 587,
-         secure: false, // true for 465, false for other ports
-         auth: {
-           user: process.env.SENDER, // generated ethereal user
-           pass: process.env.PASS, // generated ethereal password
-         },
-       });
+      //  var string = Math.random().toString(36).substr(2, 10);
+      //  let transporter = nodemailer.createTransport({
+      //    host: "smtp.gmail.com",
+      //    port: 587,
+      //    secure: false, // true for 465, false for other ports
+      //    auth: {
+      //      user: process.env.SENDER, // generated ethereal user
+      //      pass: process.env.PASS, // generated ethereal password
+      //    },
+      //  });
 
-       // send mail with defined transport object
-       let info = await transporter.sendMail({
-         from: process.env.SENDER, // sender address
-         to: req.body.email, // list of receivers
-         subject: "Activate Account ✔", // Subject line
-         text: "Hello world?", // plain text body
-         html: `<a href="https://url-shrten.herokuapp.com/activate/${req.body.email}/${string}">Click on this link to activate your account</a>`, // html body
-       });
+      //  // send mail with defined transport object
+      //  let info = await transporter.sendMail({
+      //    from: process.env.SENDER, // sender address
+      //    to: req.body.email, // list of receivers
+      //    subject: "Activate Account ✔", // Subject line
+      //    text: "Hello world?", // plain text body
+      //    html: `<a href="https://url-shrten.herokuapp.com/activate/${req.body.email}/${string}">Click on this link to activate your account</a>`, // html body
+      //  });
        await db
          .collection("users")
-         .updateOne({ email: req.body.email }, { $set: { string: string } });
+         .updateOne({ email: req.body.email }, { $set: { status: true } });
          res
            .status(200)
            .json({
              message:
-               "Please Click on conformation link send to your mail to activate",status:'sent'
+               "User registered successfully. Click on Login button... ",status:'sent'
            });
       clientInfo.close();
     }
@@ -344,3 +344,6 @@ app.get("/:string", async (req, res) => {
 });
 
 app.listen(port, () => console.log("your app runs with port:", port));
+
+
+
